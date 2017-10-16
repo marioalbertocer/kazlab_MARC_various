@@ -1,5 +1,5 @@
 # kazlab_MARC_various
-script for my research in katzlab
+scripts for my research in katzlab
 
 * seqs2remove.rb: It generates a list of sequences of contamination to be removed from sequence files such as genomes or transcriptomes. 
 Input
