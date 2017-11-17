@@ -1,6 +1,6 @@
-report_summary = File.open("../report_walk_contam_ProteinStructures.txt", 'r').readlines()
-rules = File.open("../proteinStructures_rules.txt", 'r').readlines()
-sequences_contamination = File.open("../proteinStructures_2remove.txt", 'w')
+report_summary = File.open("../report_walk_contam_jmContam-161017.txt", 'r').readlines()
+rules = File.open("../rules_jmContam-161017.txt", 'r').readlines()
+sequences_contamination = File.open("../rules_jmContam-161017_2remove2.txt", 'w')
 
 count = 0
 report_summary.each do |line|
