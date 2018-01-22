@@ -10,4 +10,8 @@ scripts for my research in katzlab
   * Output:
     * list of sequences to be removed from sequence files of the pipleline database. 
 * paralogness.rb: It calculates the paralogness (average number of paralogs per tree), the standar deviation and a confidence interval.
-	* Input: Preguidance files. 
+	* Input: Preguidance files.
+* getTrees.py: This little script search a taxon trees and copy the trees that contain the taxon.
+	* Create a folder
+	* place this scrit in the folder
+	* run script and follow the steps 
