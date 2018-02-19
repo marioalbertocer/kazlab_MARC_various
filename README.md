@@ -18,10 +18,12 @@ scripts for my research in katzlab
     * list of sequences to be removed from sequence files of the pipleline database. 
 * paralogness.rb: It calculates the paralogness (average number of paralogs per tree), the standar deviation and a confidence interval.
 	* Input: Preguidance files.
+	* run:
+		* paralogness.rb
 * getTrees.py: Searches a taxon in trees and copy the trees that contain the taxon.
 	* Create a folder
 	* place this scrit in the folder
-	* run script and follow the steps 
+	* run script (python getTrees.py) and follow the steps 
 * walk_tree_contamination_single.py: Same than walk_tree_contamination.py but with some modifications to work with single cells and report brach lengths. Read inside script to have more detailed information
 	* Create a folder
 	* place this scrit and the folder with trees in the folder.
@@ -29,7 +31,8 @@ scripts for my research in katzlab
 		* path = '/Users/katzlab32/Desktop/sisterReporter/'   <-- Here you need to put the path of the folder that you just created
 		* path2 = 'Contamination_Foram_amoebae/'  <-- name of the folder with trees (use backslash at the end)
 		* weirdtaxalist = ["Am_ar_edis", "Am_ar_ehis", "Am_ar_einv" ...] <-- replace list of taxa with your taxa of interest
-	* run script
+	* run
+		* python walk_tree_contamination_single.py
 	* IMPORTANT <-- this script requires p4
 * Check_tree_contaminant_usingrules: Collects all trees according to a rule of contamination. For instance, if there is a rule like "Sr_ci_Cunc Am", It will collect all trees that have Sr_ci_Cunc sister to a clade of Am
 	* Input: 
@@ -43,8 +46,11 @@ scripts for my research in katzlab
 		* speadsheet: report of walk_tree_contamination_single.py
 		* Open script and double check paths and file names
 		* run
+			* python summaryWTCSBL.py
 * renameFiles.rb <-- Replace words from files in a folder. For instance if I want to replace the name of a taxon (Sr_ci_Cunc) in a set of trees by another name like Sr_ci_Cu01. 
 	* Input:
 		* Folder with the original files
 		* a new empty folder <-- Here the script will place the renamed files
 		* a table (.csv) with two columns containing the original word in the first column and the new word in the second column
+	* Run: 
+		* ruby renameFiles.rb
