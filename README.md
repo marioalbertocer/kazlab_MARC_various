@@ -43,5 +43,8 @@ scripts for my research in katzlab
 		* speadsheet: report of walk_tree_contamination_single.py
 		* Open script and double check paths and file names
 		* run
-
-
+* renameFiles.rb <-- Replace words from files in a folder. For instance if I want to replace the name of a taxon (Sr_ci_Cunc) in a set of trees by another name like Sr_ci_Cu01. 
+	* Input:
+		* Folder with the original files
+		* a new empty folder <-- Here the script will place the renamed files
+		* a table (.csv) with two columns containing the original word in the first column and the new word in the second column
