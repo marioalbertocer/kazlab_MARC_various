@@ -1,6 +1,7 @@
-report_summary = File.open("../report_walk_contam_jmContam-161017.txt", 'r').readlines()
-rules = File.open("../rules_jmContam-161017.txt", 'r').readlines()
-sequences_contamination = File.open("../rules_jmContam-161017_2remove2.txt", 'w')
+path = './'
+report_summary = File.open(path + "report_walk_contamination_single_022318.txt", 'r').readlines()
+rules = File.open(path + "rules", 'r').readlines()
+sequences_contamination = File.open(path + "rules_2remove", 'w')
 
 count = 0
 report_summary.each do |line|
@@ -25,10 +26,10 @@ report_summary.each do |line|
 					puts sequence
 					sequences_contamination.write(sequence + "\n")
 				end
-				
 			end 		
 		end
 	end
 end
 
-
+seqs2remove = open(path + "rules_2remove", "r").readlines()
+	

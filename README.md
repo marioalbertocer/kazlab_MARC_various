@@ -41,16 +41,25 @@ scripts for my research in katzlab
 		* treesFolder = Folder in which you have all trees.
 	* running: 
 		* python Check_trees_contaminant_usingrules.py speadsheet rules treesFolder
-* summaryWTCSBL.py <-- Produces a summary (table) of the output of walk_tree_contamination_single.py. But, it only takes into account the cases in which the branches were short (shorter than the average branch length of the tree)
+* summaryWTCSBL.py: Produces a summary (table) of the output of walk_tree_contamination_single.py. But, it only takes into account the cases in which the branches were short (shorter than the average branch length of the tree)
 	* Input:
 		* speadsheet: report of walk_tree_contamination_single.py
 		* Open script and double check paths and file names
 		* run
 			* python summaryWTCSBL.py
-* renameFiles.rb <-- Replace words from files in a folder. For instance if I want to replace the name of a taxon (Sr_ci_Cunc) in a set of trees by another name like Sr_ci_Cu01. 
+* renameFiles.rb: Replace words from files in a folder. For instance if I want to replace the name of a taxon (Sr_ci_Cunc) in a set of trees by another name like Sr_ci_Cu01. 
 	* Input:
 		* Folder with the original files
 		* a new empty folder <-- Here the script will place the renamed files
 		* a table (.csv) with two columns containing the original word in the first column and the new word in the second column
 	* Run: 
 		* ruby renameFiles.rb
+* check_overlap.rb: Helps to determine if overlap filter is removing too many 'good' sequences by counting sequences kept and removed after the filter
+	* Input:
+		* The whole folder my-data from PhyloTOL
+	* Output: 
+		* It retrieves all sequences that were removed for the overla filter. It put them in a folder created by the user
+		* It prints in the terminal a table with counts of sequences in:
+			* before overlap filter
+			* during the filter (tsv files)
+			* after the filter (pre-guidance files)
