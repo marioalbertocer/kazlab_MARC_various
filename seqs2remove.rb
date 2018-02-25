@@ -2,7 +2,8 @@ path = './'
 report_summary = File.open(path + "report_walk_contamination_single_022318.txt", 'r').readlines()
 rules = File.open(path + "rules", 'r').readlines()
 sequences_contamination = File.open(path + "rules_2remove", 'w')
-ncbiFiles = ''
+ncbiFiles = './ncbiFiles/'
+newncbi = './newncbi/'
 seqs2remove = Array.new
 
 count = 0
@@ -34,23 +35,41 @@ report_summary.each do |line|
 end
 
 (Dir.open(ncbiFiles)).each do |ncbiFile|
-	seqs2remove.each do |seq2remove|
-		taxon = (seq2remove.split("_"))[0..9]
-		actualseq2rem = (seq2remove.split("_"))[10..-1]
-		if ncbiFile.include? taxon
-			ncbisequences = File.open(ncbiFiles + ncbiFile, "r").readlines()
-			index = 0
-			to_remove = 0
-			ncbisequences.each do |ncbisequence|
-				if actualseq2rem == ncbisequence.sub(">|\n")
-					to_remove = index
-				end
-				index += 1
+	if ncbiFile.include? ".fasta"
+		taxon = ncbiFile[0..9]
+		to_remove = Array.new
+		ncbisequences = File.open(ncbiFiles + ncbiFile, "r").readlines()
+		newncbiTags = Array.new
+		newncbiFile = File.open(newncbi + ncbiFile, "w")
+
+
+
+		puts ncbiFile
+		
+		
+		seqs2remove.each do |seq2remove|
+			if seq2remove.include? taxon
+				puts "to_remove: " + seq2remove
+				to_remove.push(seq2remove)
 			end
-			removed_seq = ncbisequences.delete_at(to_remove + 1)
-			removed_tag = ncbisequences.delete_at(to_remove)
-			puts "removed:\t" + removed_tag
-			puts "removed:\t" + removed_seq
+		end
+		
+		
+		
+		
+		index = 0
+		ncbisequences.each do |ncbisequence|
+			if ncbisequence =~ /^>/
+				tag = ncbisequence.gsub(/>|\n/, "")
+				puts tag
+				unless to_remove.include? tag
+					newncbiFile.write(ncbisequence + ncbisequences[index + 1])
+				else
+					puts "removed: " + ncbisequence
+					puts "removed: " + ncbisequences[index + 1]
+				end
+			end
+			index += 1
 		end
 	end
 end
