@@ -1,3 +1,15 @@
+# This script removes sequences according to specified rules in local databades (in each instance of the pipeline). 
+# It also produces the list of removed sequences so that they can be used for removing in the ready to go folder. 
+
+# input: 
+# - Report of sister taxa
+# - rules
+# - folder of ncbiFiles
+# - empty folder for new ncbiFiles
+
+# Running:
+# - Put all the imput files and folders in the same folder and run scrip with ruby: "ruby seqs2remove.rb"
+
 path = './'
 report_summary = File.open(path + "report_walk_contamination_single_022318.txt", 'r').readlines()
 rules = File.open(path + "rules", 'r').readlines()
@@ -29,7 +41,7 @@ report_summary.each do |line|
 					seqs2remove.push(sequence)
 					sequences_contamination.write(sequence + "\n")
 				end
-			end 		
+			end	
 		end
 	end
 end
@@ -42,20 +54,13 @@ end
 		newncbiTags = Array.new
 		newncbiFile = File.open(newncbi + ncbiFile, "w")
 
-
-
 		puts ncbiFile
-		
-		
+	
 		seqs2remove.each do |seq2remove|
 			if seq2remove.include? taxon
-				puts "to_remove: " + seq2remove
 				to_remove.push(seq2remove)
 			end
 		end
-		
-		
-		
 		
 		index = 0
 		ncbisequences.each do |ncbisequence|
@@ -73,7 +78,3 @@ end
 		end
 	end
 end
-		
-	
-
-	
