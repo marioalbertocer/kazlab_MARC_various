@@ -10,12 +10,15 @@ scripts for my research in katzlab
 		* weirdtaxalist = ["Sr_st_psub", "Pl_gr_Pokl", "Pl_rh_cmer" ...] <-- replace list of taxa with your taxa of interest
 	* run script
 	* IMPORTANT <-- this script requires p4
-* seqs2remove.rb: It generates a list of sequences of contamination to be removed from sequence files such as genomes or transcriptomes. 
+* seqs2remove.rb:removes sequences according to specified rules in local databades (in each instance of the pipeline). It also produces the list of removed sequences so that they can be used for removing in the ready to go folder 
   * Input:
     * report of sister taxa <-- This is the output of walk_tree_contamination.py. A file that list all sister taxa for each taxon in phylogenetic trees
     * rules for contamination removal <-- A list of rules for contamination removal that is based on the report of sister taxa and watching the phylogenetic trees.
+    * folder of ncbiFiles
+    * empty folder for new ncbiFiles
   * Output:
-    * list of sequences to be removed from sequence files of the pipleline database. 
+    * list of sequences to be removed from sequence files of the pipleline database.
+    * new ncbiFiles with sequences of contamination already removed
 * paralogness.rb: It calculates the paralogness (average number of paralogs per tree), the standar deviation and a confidence interval.
 	* Input: Preguidance files.
 	* run:
