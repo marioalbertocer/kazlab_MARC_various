@@ -14,16 +14,15 @@ import os, re
 import csv
 var.doRepairDupedTaxonNames = 1
 
-path = '/Users/katzlab32/Desktop/sisterReporter/' 				# This is the folder that is the parent
+path = '/Users/katzlab32/Desktop/021618_contaminationOGs/' 				# This is the folder that is the parent
 												# of the the folder in which you have your trees
 #path2 = '/Users/katzlab32/Desktop/contamination/contamination_alltaxa/' 			# This is the actual folder where you have the trees
 
-path2 = 'Contamination_Foram_amoebae/'
-report = open (path + 'report_walk_contamination_single_amoeba.txt', 'w')	# Here is the output
+path2 = 'trees/'
+report = open (path + 'report_walk_contamination_single-all.txt', 'w')	# Here is the output
 
 # In the next line you should list the weird taxa
-weirdtaxalist = ["Am_ar_edis", "Am_ar_ehis", "Am_ar_einv", "Am_ar_Enut", "Am_ar_Mbal", "Am_di_Acas", "Am_di_Ahea", "Am_di_Cmit", "Am_di_Endo", "Am_di_Luap", "Am_di_Mspa", "Am_di_Naes", "Am_di_Odes", "Am_di_Patl", "Am_di_Pcat", "Am_di_Pess", "Am_di_Tric", "Am_di_Vexi", "Am_di_Vnsp", "Am_di_Vrob", "Am_di_Vsim", "Am_hi_Gfon", "Am_is_Fflu", "Am_is_Fnol", "Am_is_Fsin", "Am_is_Pmon", "Am_is_Sram", "Am_is_Sste", "Am_is_Vant", "Am_my_Asub", "Am_my_Ddac", "Am_my_ddis", "Am_my_Dpur", "Am_my_Ppal", "Am_my_Ppol", "Am_th_Tqua", "Am_tu_Hver", "Am_tu_Nabe", "Am_va_Clsp", "Am_va_Usch", "EE_ap_Ttra", "EE_br_Bant", "EE_br_Stet", "EE_ce_Acsp", "EE_ce_Chsp", "EE_ce_Reri", "EE_ce_Rhet", "EE_cr_Ccur", "EE_cr_Gcry", "EE_cr_Gpac", "EE_cr_Gspa", "EE_cr_Gspb", "EE_cr_Gthe", "EE_cr_Hand", "EE_cr_Hphi", "EE_cr_Htep", "EE_cr_Psul", "EE_cr_Rlen", "EE_cr_Rsal", "EE_cr_Undd", "EE_ha_Cbre", "EE_ha_Clep", "EE_ha_Cpol", "EE_ha_Crho", "EE_ha_Ehux", "EE_ha_Goce", "EE_ha_Igal", "EE_ha_Ispa", "EE_ha_Pant", "EE_ha_Pcar", "EE_ha_Pcrd", "EE_ha_Plut", "EE_ha_Ppar", "EE_ha_Pspa", "EE_ha_Saps", "EE_ha_Unid", "EE_is_Ctri", "EE_is_Pbil", "EE_is_Tglo", "EE_is_Tmar", "EE_is_Tsub", "EE_ka_Rtru", "Ex_eu_Bsal", "Ex_eu_Dpap", "Ex_eu_Egra", "Ex_eu_Egym", "Ex_eu_Elon", "Ex_eu_lbra", "Ex_eu_linf", "Ex_eu_lmaj", "Ex_eu_lmex", "Ex_eu_Lpyr", "Ex_eu_Ndes", "Ex_eu_Pemi", "Ex_eu_Pser", "Ex_eu_Scul", "Ex_eu_tbrg", "Ex_eu_tbru", "Ex_eu_tcon", "Ex_eu_tcru", "Ex_eu_tviv", "Ex_fo_glab", "Ex_fo_glae", "Ex_fo_glam", "Ex_fo_Sbar", "Ex_fo_Ssal", "Ex_fo_Svor", "Ex_he_Ngru", "Ex_he_Pcos", "Ex_he_Slip", "Ex_he_Smar", "Ex_is_Tpyr", "Ex_ja_Haro", "Ex_ja_Jbah", "Ex_ja_Jlib", "Ex_ja_Rame", "Ex_ja_Secu", "Ex_ma_Mcal", "Ex_ma_Mjak", "Ex_ox_Mono", "Ex_pa_Hmel", "Ex_pa_Phom", "Ex_pa_Tfoe", "Ex_pa_tvag", "Op_ch_mbre", "Op_ch_Mova", "Op_ch_Sros", "Op_fu_Aalg", "Op_fu_afum", "Op_fu_Aloc", "Op_fu_Amac", "Op_fu_anid", "Op_fu_aory", "Op_fu_Bden", "Op_fu_calb", "Op_fu_Ccor", "Op_fu_cgla", "Op_fu_cimm", "Op_fu_cneg", "Op_fu_cneo", "Op_fu_cpos", "Op_fu_dhan", "Op_fu_Dspa", "Op_fu_ebie", "Op_fu_ecun", "Op_fu_egos", "Op_fu_eint", "Op_fu_Gpro", "Op_fu_gzea", "Op_fu_klac", "Op_fu_lbic", "Op_fu_Lcor", "Op_fu_Mdap", "Op_fu_Mglo", "Op_fu_mgri", "Op_fu_Mmel", "Op_fu_Napi", "Op_fu_Ncer", "Op_fu_ncra", "Op_fu_Npar", "Op_fu_Npat", "Op_fu_pchr", "Op_fu_Pgra", "Op_fu_Pneu", "Op_fu_Pspa", "Op_fu_psti", "Op_fu_Rall", "Op_fu_Rdel", "Op_fu_Rirr", "Op_fu_scer", "Op_fu_Scom", "Op_fu_spom", "Op_fu_Spun", "Op_fu_Trub", "Op_fu_Umey", "Op_fu_Wseb", "Op_fu_ylip", "Op_ic_Apar", "Op_ic_Cowc", "Op_ic_Sarc", "Op_is_Mvib", "Op_me_aaeg", "Op_me_Aaur", "Op_me_Acal", "Op_me_agam", "Op_me_amel", "Op_me_apis", "Op_me_Aque", "Op_me_Avag", "Op_me_Avir", "Op_me_Bflo", "Op_me_bmaa", "Op_me_bmor", "Op_me_Bplu", "Op_me_cbri", "Op_me_cele", "Op_me_Cfol", "Op_me_Cgig", "Op_me_cint", "Op_me_clup", "Op_me_Cmey", "Op_me_cpip", "Op_me_Cpul", "Op_me_Ctel", "Op_me_dmel", "Op_me_Dpul", "Op_me_drer", "Op_me_ecab", "Op_me_Emue", "Op_me_ggal", "Op_me_Hcal", "Op_me_Hech", "Op_me_Hrob", "Op_me_hsap", "Op_me_Hvul", "Op_me_isca", "Op_me_Lbai", "Op_me_Lcha", "Op_me_mdom", "Op_me_Mlei", "Op_me_mmul", "Op_me_mmus", "Op_me_nvec", "Op_me_oana", "Op_me_Ocar", "Op_me_Odio", "Op_me_Olob", "Op_me_Omin", "Op_me_Pcar", "Op_me_Pglo", "Op_me_phum", "Op_me_Ppil", "Op_me_ptro", "Op_me_rnor", "Op_me_Sdom", "Op_me_Skow", "Op_me_sman", "Op_me_Srap", "Op_me_tadh", "Op_me_Tbry", "Op_me_Tkit", "Op_me_tnig", "Op_me_trub", "Op_me_Tspi", "Op_me_Xboc", "Pl_gl_Cglo", "Pl_gl_Cpad", "Pl_gl_Gnos", "Pl_gl_Gwit", "Pl_gr_Aace", "Pl_gr_Aalb", "Pl_gr_atha", "Pl_gr_Atri", "Pl_gr_Bpra", "Pl_gr_Cinc", "Pl_gr_Cjap", "Pl_gr_Cmoe", "Pl_gr_Corb", "Pl_gr_crei", "Pl_gr_Cscu", "Pl_gr_Csti", "Pl_gr_Cvar", "Pl_gr_Dsal", "Pl_gr_Dten", "Pl_gr_Egui", "Pl_gr_Gbil", "Pl_gr_Hann", "Pl_gr_Heli", "Pl_gr_Mant", "Pl_gr_micr", "Pl_gr_Mpol", "Pl_gr_Mpus", "Pl_gr_Mspa", "Pl_gr_Mver", "Pl_gr_Npyr", "Pl_gr_Ntab", "Pl_gr_Oluc", "Pl_gr_Omed", "Pl_gr_osat", "Pl_gr_otau", "Pl_gr_Pcap", "Pl_gr_Pcol", "Pl_gr_Pgel", "Pl_gr_Pgin", "Pl_gr_Pobo", "Pl_gr_Pokl", "Pl_gr_Ppaa", "Pl_gr_ppat", "Pl_gr_Prap", "Pl_gr_Psal", "Pl_gr_Psin", "Pl_gr_Pspa", "Pl_gr_Pspd", "Pl_gr_Pspf", "Pl_gr_Pspg", "Pl_gr_Ptae", "Pl_gr_Pwic", "Pl_gr_rcom", "Pl_gr_Sobl", "Pl_gr_Tchu", "Pl_gr_Tstr", "Pl_gr_vcar", "Pl_rh_Batr", "Pl_rh_Ccho", "Pl_rh_Ccoe", "Pl_rh_cmer", "Pl_rh_Eaus", "Pl_rh_Eden", "Pl_rh_Emad", "Pl_rh_Furc", "Pl_rh_Goki", "Pl_rh_Gsul", "Pl_rh_Gten", "Pl_rh_Hpul", "Pl_rh_Kalv", "Pl_rh_Lden", "Pl_rh_Paer", "Pl_rh_Phai", "Pl_rh_Pyez", "Pl_rh_Rhod", "Pl_rh_Rmac", "Pl_rh_Rmar", "Pl_rh_Toli", "Sr_ap_bbov", "Sr_ap_chom", "Sr_ap_cmur", "Sr_ap_Cpar", "Sr_ap_Eace", "Sr_ap_Emax", "Sr_ap_Eten", "Sr_ap_Gnip", "Sr_ap_Hham", "Sr_ap_Labb", "Sr_ap_ncan", "Sr_ap_pber", "Sr_ap_pcha", "Sr_ap_pfal", "Sr_ap_pkno", "Sr_ap_pviv", "Sr_ap_pyoe", "Sr_ap_tann", "Sr_ap_tgon", "Sr_ap_tpar", "Sr_ch_Cvel", "Sr_ch_Vbra", "Sr_ci_Ahae", "Sr_ci_Ansp", "Sr_ci_Bame", "Sr_ci_Bjap", "Sr_ci_Brsp", "Sr_ci_Btru", "Sr_ci_Camp", "Sr_ci_Cirr", "Sr_ci_Clim", "Sr_ci_Cmag", "Sr_ci_Cpsp", "Sr_ci_Cunc", "Sr_ci_Cxsp", "Sr_ci_Dmuc", "Sr_ci_Dnas", "Sr_ci_Drum", "Sr_ci_Ecau", "Sr_ci_Ecra", "Sr_ci_Eeca", "Sr_ci_Efoc", "Sr_ci_Ehar", "Sr_ci_Emag", "Sr_ci_Fehr", "Sr_ci_Fron", "Sr_ci_Ftar", "Sr_ci_Glsp", "Sr_ci_Imul", "Sr_ci_Ipro", "Sr_ci_Knsp", "Sr_ci_Lemb", "Sr_ci_Lito", "Sr_ci_Lxsp", "Sr_ci_Mavi", "Sr_ci_Meto", "Sr_ci_Mpul", "Sr_ci_Nosp", "Sr_ci_Nova", "Sr_ci_Otri", "Sr_ci_Padh", "Sr_ci_Pmul", "Sr_ci_Posp", "Sr_ci_Pper", "Sr_ci_Pros", "Sr_ci_Pspe", "Sr_ci_Pssp", "Sr_ci_Ptet", "Sr_ci_Rmsp", "Sr_ci_Samb", "Sr_ci_Sasu", "Sr_ci_Scer", "Sr_ci_Sinc", "Sr_ci_Slem", "Sr_ci_Smin", "Sr_ci_Sond", "Sr_ci_Spat", "Sr_ci_Sras", "Sr_ci_Sroe", "Sr_ci_Sspp", "Sr_ci_Tcsp", "Sr_ci_tthe", "Sr_ci_Vort", "Sr_ci_Zssp", "Sr_di_Acar", "Sr_di_Amas", "Sr_di_Aost", "Sr_di_Aspi", "Sr_di_Aspp", "Sr_di_Atam", "Sr_di_Bnut", "Sr_di_Ccoh", "Sr_di_Cfus", "Sr_di_Dacu", "Sr_di_Dbal", "Sr_di_Espp", "Sr_di_Gaus", "Sr_di_Gcat", "Sr_di_Gspi", "Sr_di_Harc", "Sr_di_Hsps", "Sr_di_Htri", "Sr_di_Kbre", "Sr_di_Kfol", "Sr_di_Kmic", "Sr_di_Kmik", "Sr_di_Kven", "Sr_di_Lelo", "Sr_di_Lfis", "Sr_di_Lpol", "Sr_di_Nsci", "Sr_di_Omar", "Sr_di_Paci", "Sr_di_Pbah", "Sr_di_Pbei", "Sr_di_Pgla", "Sr_di_Plim", "Sr_di_Plun", "Sr_di_Pmin", "Sr_di_Ppis", "Sr_di_Pret", "Sr_di_Pspp", "Sr_di_Shan", "Sr_di_Skaw", "Sr_di_Smic", "Sr_di_Stro", "Sr_di_Syma", "Sr_di_Tjol", "Sr_pe_Olen", "Sr_pe_Pche", "Sr_pe_Perk", "Sr_rh_Aelo", "Sr_rh_Amsp", "Sr_rh_Asco", "Sr_rh_Aspa", "Sr_rh_Astr", "Sr_rh_Blon", "Sr_rh_Bmar", "Sr_rh_Bmot", "Sr_rh_Bnat", "Sr_rh_Briz", "Sr_rh_Cdel", "Sr_rh_Cerc", "Sr_rh_Crep", "Sr_rh_Cssp", "Sr_rh_Cten", "Sr_rh_Cysp", "Sr_rh_Emar", "Sr_rh_Erot", "Sr_rh_Eusp", "Sr_rh_Gcom", "Sr_rh_Gspa", "Sr_rh_Lamo", "Sr_rh_Loce", "Sr_rh_Lset", "Sr_rh_Lvor", "Sr_rh_Misp", "Sr_rh_Mmac", "Sr_rh_Nsph", "Sr_rh_Nsps", "Sr_rh_Pbra", "Sr_rh_Pglo", "Sr_rh_Phya", "Sr_rh_Phyb", "Sr_rh_Pmar", "Sr_rh_Pmic", "Sr_rh_Pssp", "Sr_rh_Quin", "Sr_rh_Rfil", "Sr_rh_Spsu", "Sr_rh_Sspa", "Sr_rh_Szan", "Sr_rh_Trsp", "Sr_st_Aana", "Sr_st_Aast", "Sr_st_Acan", "Sr_st_Acof", "Sr_st_Ainv", "Sr_st_Alag", "Sr_st_Alai", "Sr_st_Alim", "Sr_st_Aman", "Sr_st_Amsp", "Sr_st_Apal", "Sr_st_Arad", "Sr_st_Aspb", "Sr_st_Asub", "Sr_st_Atth", "Sr_st_Bhom", "Sr_st_Bpac", "Sr_st_Bspa", "Sr_st_Bspp", "Sr_st_Cfra", "Sr_st_Chys", "Sr_st_Cneb", "Sr_st_Cneo", "Sr_st_Croe", "Sr_st_Cspa", "Sr_st_Cspb", "Sr_st_Cspc", "Sr_st_Csub", "Sr_st_Cten", "Sr_st_Cwai", "Sr_st_Dbri", "Sr_st_Dfra", "Sr_st_Dspa", "Sr_st_Dspe", "Sr_st_Esil", "Sr_st_Espa", "Sr_st_Espi", "Sr_st_Fcyl", "Sr_st_Fjap", "Sr_st_Fpar", "Sr_st_Fser", "Sr_st_Fspa", "Sr_st_Fves", "Sr_st_Goce", "Sr_st_Hseo", "Sr_st_Htam", "Sr_st_Ldig", "Sr_st_Ljap", "Sr_st_Lpar", "Sr_st_Lqpa", "Sr_st_Lqpb", "Sr_st_Mpol", "Sr_st_Mspa", "Sr_st_Ngad", "Sr_st_Nocu", "Sr_st_Npun", "Sr_st_Nspa", "Sr_st_Odan", "Sr_st_Ospa", "Sr_st_Paus", "Sr_st_Pcal", "Sr_st_Pela", "Sr_st_Penc", "Sr_st_Pfar", "Sr_st_Pimp", "Sr_st_Pinf", "Sr_st_Pins", "Sr_st_Pmul", "Sr_st_Poli", "Sr_st_Ppar", "Sr_st_Ppyr", "Sr_st_pram", "Sr_st_Pspl", "Sr_st_Psub", "Sr_st_Pter", "Sr_st_Ptri", "Sr_st_Pult", "Sr_st_Pves", "Sr_st_Pvit", "Sr_st_Rmar", "Sr_st_Sagg", "Sr_st_Sbin", "Sr_st_Scon", "Sr_st_Sdic", "Sr_st_Selo", "Sr_st_Slat", "Sr_st_Spar", "Sr_st_Spus", "Sr_st_Sspa", "Sr_st_Stur", "Sr_st_Suni", "Sr_st_Tfra", "Sr_st_tpse", "Sr_st_Trot", "Sr_st_Tspa"]
-
+weirdtaxalist = ["Ex_pa_Tfoe", "Sr_st_tpse", "Sr_st_Csub", "Am_di_Naes", "Op_me_hsap", "Op_me_sman", "Op_me_cele", "Op_me_Dpul", "Op_me_Ctel", "Op_me_tadh", "Op_fu_Amac", "Ex_eu_Bsal", "Ex_he_Ngru", "EE_ap_Ttra", "Sr_st_Bpac", "Pl_gr_Pspg", "Op_ch_mbre", "EE_is_Drot", "Sr_st_Dspe", "EE_cr_Gcry", "Sr_st_Pinf", "Sr_di_Hsps", "Sr_rh_Sspa", "Sr_di_Aspi", "Sr_di_Gcat", "Sr_ci_Ptet", "Sr_ci_Scer", "Ex_pa_tvag", "Sr_ap_Cpar", "Sr_ap_pfal", "Ex_ma_Mjak", "Ex_is_Tpyr", "Pl_rh_Ccho", "Pl_rh_Rmar", "Pl_rh_Ccoe", "Pl_rh_Gsul", "Sr_rh_Lvor", "EE_ce_Rhet", "Am_di_Mspa", "Am_is_Fnol", "EE_ce_Chsp", "EE_ap_Mpla", "EE_ap_Rram", "Ex_ox_Mono", "Sr_rh_Bmot", "EE_ap_Nlon", "EE_is_Tmar", "Ex_eu_Egym", "Sr_ci_Slem", "Op_fu_Aalg", "Am_my_Dpur", "Sr_ch_Vbra", "EE_ap_Ftro", "Am_is_Fflu", "Sr_st_Esil", "Za_as_Heia", "Za_as_Thob", "Za_as_Loki", "Za_as_Odin", "Sr_pe_Perk", "Sr_rh_Cten", "Sr_st_Cfra", "Sr_st_Aana", "Am_ar_Enut", "Am_ar_Mbal", "Op_fu_Bden", "Pl_gr_Atri", "Sr_st_Ospa", "Op_ch_Sros", "Pl_gr_Cvar", "Op_me_Hvul", "Sr_rh_Bnat", "Sr_st_Goce", "Ex_ja_Rame", "Am_my_Ppol", "Pl_gr_Pcol", "Ex_eu_linf", "Ex_eu_tcon", "Pl_gl_Cpad", "Sr_rh_Astr", "Sr_rh_Erot", "Pl_gr_atha", "Pl_gr_Mpol", "Pl_gr_Tchu", "Pl_gr_crei", "Am_di_Acas", "EE_is_Tglo", "Am_tu_Nabe", "Op_ic_Sarc", "Op_is_Mvib", "Op_me_Cfol", "Op_ic_Cowc", "Op_me_Cpul", "Op_fu_Dspa", "Op_fu_Npat", "Op_fu_Ccor", "Op_fu_scer", "Op_fu_Lcor", "Pl_gl_Gnos", "Op_me_Skow", "Op_ic_Apar", "Sr_rh_Asco", "EE_ha_Ehux", "EE_ha_Igal", "EE_is_Tsub", "EE_br_Bant", "EE_ka_Rtru", "Sr_st_Ngad", "Sr_st_Bhom", "Sr_st_Espi", "Sr_st_Ptri", "Sr_st_Spus", "Sr_di_Omar", "Sr_st_Aman", "Sr_st_Croe", "Op_fu_Rall", "Op_me_Ppil", "Ex_fo_Sbar", "Sr_di_Smic", "Sr_ap_Gnip", "Sr_st_Ppar", "EE_br_Stet", "Ba_pg_Abau", "Ba_ac_Cdip", "Ba_pd_Daes", "Ba_cy_Pspb", "Ba_cy_Acyl", "Ba_cy_Onig", "Ba_ch_Caur", "Ba_di_Dtur", "Ba_fb_Gkau", "Ba_ni_Tyel", "Za_ko_ckor", "Ba_sp_Sple", "Ba_pl_Plim", "Ba_bc_Ctha", "Ba_fu_Fnuc", "Ba_te_Alai", "Ba_pg_ecol", "Ba_pb_bpse", "Ba_pa_Abra", "Ba_de_Trad", "Ba_th_tmar", "Ba_pb_Vpar", "Ba_ba_Bfra", "Ba_fc_Oval", "EE_ap_Asig", "Ba_cd_Cmur", "Za_eh_Haci", "Za_eh_Ngre", "Ba_aq_aaeo", "Za_et_Tkod", "Za_ec_Minf", "Za_ey_Mkan", "Za_eb_Mspa", "Za_em_Mhol", "Za_cr_Sisl", "Za_th_Csym", "Ex_eu_Dpap", "Za_ep_tvol", "Za_na_nequ", "Ba_cv_Amuc", "Ba_pa_rpro", "Za_pa_Maci", "Za_cr_Tneu", "Sr_ap_Bequ", "Za_ba_Crea", "Op_nu_Falb"]
 def get_clades(taxon):								# Get different forms of the taxa/clade identifier
 	major = taxon.split('_')[0]   					# The identifier as major clade (e.g., Am, Ex)
 	minor = taxon.split('_')[1]	  					# The identifier as minor clade (e.g., di, eu)
@@ -78,8 +77,9 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 			taxon_names_mod.append(get_clades(taxon)[4])	# Modify the name using function 'get_clades'
 			taxon_names_mod2.append(get_clades(taxon)[3])	# Read at the top what 'get_clades' does 
 															# append the modified name in taxon_names_mod
-		
+			
 		taxon_names_mod2 = list(set(taxon_names_mod2))
+
 		doBL = 'y'
 		branches = {}
 		numberNodes = 0
@@ -101,18 +101,17 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 					sizes_cladesEx = {}				
 					sizes_cladesSr = {}				
 				
-				
 					for node in tree.iterNodesNoRoot():				# For each node in the tree
 						allTaxa_node = tree.getAllLeafNames(node)	# Get all taxa from leaves per node...
 																	# ... and make a list.
-					
+						
 						if doBL == 'y':
 							numberNodes += 1
 							branch = node.br.len											
 							branches[str(node)] = float(branch)
+							
+						MC_list =[]
 
-				
-						MC_list =[]								
 						for taxon in allTaxa_node:					# Take each taxon from the list above 
 							MC_list.append(get_clades(taxon)[0])	# and get the major clade using 'get_clades'
 																	# it will end up with ...
@@ -296,13 +295,13 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 																					# report result in output
 								
 									if len(sisterMinors) > 20 : minors = 'too-long'
-									report.write (OG5 + '\t' + taxa + '\t' + taxon_full + '\t' +  result + '\t'  + minors + '\t' + str(branch2report) + '\t' + str(averageBL) + '\n') 
+									report.write (OG5 + '\t' + taxa + '\t' + taxon_full + '\t' +  result + '\t'  + minors + '\t' + str(branch2report) + '\t' + str(averageBL) + '\n')
+									
+					doBL = 'n'
 
 				else:
 					result = 'no_taxaOFinterest' # If the tree does not have the weird taxon, return 'no_taxaOFinterest'
 	#				report.write (OG5 + ',' + taxa + ',' +  result + '\n') # report result in output
-
-				doBL = 'n'
 
 			if 'error tree' in error_tree: # if the tree couldn't be re-rooted, retrieve 'OG cannot be annalized' 
 				print OG5 + ' cannot be annalized'
