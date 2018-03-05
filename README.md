@@ -7,7 +7,7 @@ scripts for my research in katzlab
 	* Change these two lines
 		* path = '/home/mario/walk_tree/'   <-- Here you need to put the path of the folder that you just created
 		* path2 = 'treesYY/'   <-- name of the folder with trees (use backslash at the end)
-		* weirdtaxalist = ["Sr_st_psub", "Pl_gr_Pokl", "Pl_rh_cmer" ...] <-- replace list of taxa with your taxa of interest
+		* weirdtaxalist = ["Sr_st_psub", "Pl_gr_Pokl", "Pl_rh_cmer" ...] <-- replace list of taxa with your taxa of interest or leave empty "[]" if you want to run with all taxa included in your trees
 	* run script
 	* IMPORTANT <-- this script requires p4
 * seqs2remove.rb:removes sequences according to specified rules in local databades (in each instance of the pipeline). It also produces the list of removed sequences so that they can be used for removing in the ready to go folder 
