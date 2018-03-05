@@ -33,7 +33,7 @@ scripts for my research in katzlab
 	* Change these two lines
 		* path = '/Users/katzlab32/Desktop/sisterReporter/'   <-- Here you need to put the path of the folder that you just created
 		* path2 = 'Contamination_Foram_amoebae/'  <-- name of the folder with trees (use backslash at the end)
-		* weirdtaxalist = ["Am_ar_edis", "Am_ar_ehis", "Am_ar_einv" ...] <-- replace list of taxa with your taxa of interest
+		* weirdtaxalist = ["Am_ar_edis", "Am_ar_ehis", "Am_ar_einv" ...] <-- replace list of taxa with your taxa of interest or leave empty "[]" if you want to run with all taxa included in your trees
 	* run
 		* python walk_tree_contamination_single.py
 	* IMPORTANT <-- this script requires p4
