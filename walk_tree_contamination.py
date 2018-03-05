@@ -13,7 +13,12 @@ report = open (path + 'report_walk_contamination.txt', 'w')	# Here is the output
 #weirdtaxalist = ["Sr_ci_Ahae", "Sr_ci_Ansp", "Sr_ci_Bame", "Sr_ci_Bjap", "Sr_ci_Brsp", "Sr_ci_Btru", "Sr_ci_Camp", "Sr_ci_Cirr", "Sr_ci_Clim", "Sr_ci_Cmag", "Sr_ci_Cpsp", "Sr_ci_Cunc", "Sr_ci_Cxsp", "Sr_ci_Dmuc", "Sr_ci_Dnas", "Sr_ci_Drum", "Sr_ci_Ecau", "Sr_ci_Ecra", "Sr_ci_Eeca", "Sr_ci_Efoc", "Sr_ci_Ehar", "Sr_ci_Emag", "Sr_ci_Fehr", "Sr_ci_Fron", "Sr_ci_Ftar", "Sr_ci_Glsp", "Sr_ci_Imul", "Sr_ci_Ipro", "Sr_ci_Knsp", "Sr_ci_Lemb", "Sr_ci_Lito", "Sr_ci_Lxsp", "Sr_ci_Mavi", "Sr_ci_Meto", "Sr_ci_Mpul", "Sr_ci_Nosp", "Sr_ci_Nova", "Sr_ci_Otri", "Sr_ci_Padh", "Sr_ci_Pmul", "Sr_ci_Posp", "Sr_ci_Pper", "Sr_ci_Pros", "Sr_ci_Pspe", "Sr_ci_Pssp", "Sr_ci_Ptet", "Sr_ci_Rmsp", "Sr_ci_Samb", "Sr_ci_Sasu", "Sr_ci_Scer", "Sr_ci_Sinc", "Sr_ci_Slem", "Sr_ci_Smin", "Sr_ci_Sond", "Sr_ci_Spat", "Sr_ci_Sras", "Sr_ci_Sroe", "Sr_ci_Sspp", "Sr_ci_Tcsp", "Sr_ci_tthe", "Sr_ci_Vort", "Sr_ci_Zssp"]
 #weirdtaxalist = ["Sr_rh_Aelo", "Sr_rh_Amsp", "Sr_rh_Asco", "Sr_rh_Aspa", "Sr_rh_Assp", "Sr_rh_Astr", "Sr_rh_Blon", "Sr_rh_Bmar", "Sr_rh_Bmot", "Sr_rh_Bnat", "Sr_rh_Briz", "Sr_rh_Cdel", "Sr_rh_Cerc", "Sr_rh_Cgra", "Sr_rh_Crep", "Sr_rh_Cssp", "Sr_rh_Cten", "Sr_rh_Cysp", "Sr_rh_Emar", "Sr_rh_Erot", "Sr_rh_Eusp", "Sr_rh_Gcom", "Sr_rh_Gspa", "Sr_rh_Lamo", "Sr_rh_Loce", "Sr_rh_Lvor", "Sr_rh_Mchi", "Sr_rh_Misp", "Sr_rh_Mmac", "Sr_rh_Nsph", "Sr_rh_Nsps", "Sr_rh_Pbra", "Sr_rh_Pglo", "Sr_rh_Phyl", "Sr_rh_Pmar", "Sr_rh_Pmic", "Sr_rh_Pssp", "Sr_rh_Quin", "Sr_rh_Rfil", "Sr_rh_Spsu", "Sr_rh_Sspa", "Sr_rh_Trsp"]
 #weirdtaxalist = ["Sr_rh_Cdel", "Sr_rh_Cssp", "Sr_rh_Cgra", "Sr_rh_Assp", "Sr_rh_Amsp", "Sr_rh_Cysp", "Sr_rh_Eusp", "Sr_rh_Misp", "Sr_rh_Pssp", "Sr_rh_Trsp"]
-weirdtaxalist = ["Sr_st_psub", "Pl_gr_Pokl", "Pl_rh_cmer", "Op_me_mmul", "Sr_rh_mmac", "EE_ha_Pcrd", "Pl_gr_Pcol", "Sr_rh_Eusp", "Sr_ci_Sspp", "Pl_gr_Ptab", "Sr_rh_Pssp", "Op_me_isca", "Ex_eu_scul", "Sr_di_Nsci", "Pl_gr_Ntab", "Pl_gr_Cjap", "Op_me_Hech", "Sr_rh_Asco", "Pl_gr_Ptae", "Sr_st_Sbin", "Pl_rh_Hpul", "Sr_rh_Aelo", "Ex_eu_Dpap", "Sr_st_Trot", "Pl_rh_Furc", "Sr_rh_Cerc", "Sr_di_Lpol", "Pl_gr_Csti", "Am_ar_Mbal", "Sr_st_Mspa", "Sr_st_Croe", "Pl_gl_Gwit", "Sr_ch_Vbra", "Ex_is_Tpyr", "Pl_gr_Omed", "Sr_ci_Bjap", "Sr_ci_Sras", "Op_me_Avir", "Pl_gr_Tstr", "Pl_gr_Pokl", "Sr_ci_Bjap", "Sr_ci_Brsp", "Sr_ci_Clim", "Sr_ci_Cunc", "Sr_ci_Ecra", "Sr_ci_Efoc", "Sr_ci_Fehr", "Sr_ci_Ftar", "Sr_ci_Glsp", "Sr_ci_Knsp", "Sr_ci_Lemb", "Sr_ci_Lito", "Sr_ci_Lxsp", "Sr_ci_Meto", "Sr_ci_Mpul", "Sr_ci_Nosp", "Sr_ci_Padh", "Sr_ci_Posp", "Sr_ci_Pspe", "Sr_ci_Pssp", "Sr_ci_Rmsp", "Sr_ci_Sasu", "Sr_ci_Sinc", "Sr_ci_Smin", "Sr_ci_Spat", "Sr_ci_Sras", "Sr_ci_Sroe", "Sr_ci_Sspp", "Sr_ci_Vort", "Sr_ci_Zssp", "Sr_rh_Amsp", "Sr_rh_Eusp", "Sr_rh_Lvor", "Sr_rh_Misp", "Sr_rh_Sspa", "Sr_rh_Trsp"]
+weirdtaxalist = [] # Leave empty if you want to run script in all taxa included in your trees
+
+if weirdtaxalist == []: 
+	taxlist = 'no'
+else:
+	taxlist = 'yes'
 
 def get_clades(taxon):								# Get different forms of the taxa/clade identifier
 	major = taxon.split('_')[0]   					# The identifier as major clade (e.g., Am, Ex)
@@ -64,9 +69,12 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 													# Then, you should initialize this var here.
 				
 		for taxon in taxon_names:							# Take each taxon name
-			taxon_names_mod.append(get_clades(taxon)[4])	# Modify the name using function 'get_clades'
-															# Read at the top what 'get_clades' does 
-															# append the modified name in taxon_names_mod
+			taxon_mod = get_clades(taxon)[4]	# Modify the name using function 'get_clades' 
+			taxon_names_mod.append(taxon_mod)	# Append the modified name in taxon_names_mod
+			
+			if taxlist == 'no':
+				if taxon_mod not in weirdtaxalist:
+					weirdtaxalist.append(taxon_mod)
 		
 		error_tree = ''	
 		for taxa in weirdtaxalist:				# For each weird taxon ...

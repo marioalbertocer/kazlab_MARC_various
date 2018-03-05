@@ -22,7 +22,14 @@ path2 = 'trees/'
 report = open (path + 'report_walk_contamination_single-all.txt', 'w')	# Here is the output
 
 # In the next line you should list the weird taxa
-weirdtaxalist = ["Ex_pa_Tfoe", "Sr_st_tpse", "Sr_st_Csub", "Am_di_Naes", "Op_me_hsap", "Op_me_sman", "Op_me_cele", "Op_me_Dpul", "Op_me_Ctel", "Op_me_tadh", "Op_fu_Amac", "Ex_eu_Bsal", "Ex_he_Ngru", "EE_ap_Ttra", "Sr_st_Bpac", "Pl_gr_Pspg", "Op_ch_mbre", "EE_is_Drot", "Sr_st_Dspe", "EE_cr_Gcry", "Sr_st_Pinf", "Sr_di_Hsps", "Sr_rh_Sspa", "Sr_di_Aspi", "Sr_di_Gcat", "Sr_ci_Ptet", "Sr_ci_Scer", "Ex_pa_tvag", "Sr_ap_Cpar", "Sr_ap_pfal", "Ex_ma_Mjak", "Ex_is_Tpyr", "Pl_rh_Ccho", "Pl_rh_Rmar", "Pl_rh_Ccoe", "Pl_rh_Gsul", "Sr_rh_Lvor", "EE_ce_Rhet", "Am_di_Mspa", "Am_is_Fnol", "EE_ce_Chsp", "EE_ap_Mpla", "EE_ap_Rram", "Ex_ox_Mono", "Sr_rh_Bmot", "EE_ap_Nlon", "EE_is_Tmar", "Ex_eu_Egym", "Sr_ci_Slem", "Op_fu_Aalg", "Am_my_Dpur", "Sr_ch_Vbra", "EE_ap_Ftro", "Am_is_Fflu", "Sr_st_Esil", "Za_as_Heia", "Za_as_Thob", "Za_as_Loki", "Za_as_Odin", "Sr_pe_Perk", "Sr_rh_Cten", "Sr_st_Cfra", "Sr_st_Aana", "Am_ar_Enut", "Am_ar_Mbal", "Op_fu_Bden", "Pl_gr_Atri", "Sr_st_Ospa", "Op_ch_Sros", "Pl_gr_Cvar", "Op_me_Hvul", "Sr_rh_Bnat", "Sr_st_Goce", "Ex_ja_Rame", "Am_my_Ppol", "Pl_gr_Pcol", "Ex_eu_linf", "Ex_eu_tcon", "Pl_gl_Cpad", "Sr_rh_Astr", "Sr_rh_Erot", "Pl_gr_atha", "Pl_gr_Mpol", "Pl_gr_Tchu", "Pl_gr_crei", "Am_di_Acas", "EE_is_Tglo", "Am_tu_Nabe", "Op_ic_Sarc", "Op_is_Mvib", "Op_me_Cfol", "Op_ic_Cowc", "Op_me_Cpul", "Op_fu_Dspa", "Op_fu_Npat", "Op_fu_Ccor", "Op_fu_scer", "Op_fu_Lcor", "Pl_gl_Gnos", "Op_me_Skow", "Op_ic_Apar", "Sr_rh_Asco", "EE_ha_Ehux", "EE_ha_Igal", "EE_is_Tsub", "EE_br_Bant", "EE_ka_Rtru", "Sr_st_Ngad", "Sr_st_Bhom", "Sr_st_Espi", "Sr_st_Ptri", "Sr_st_Spus", "Sr_di_Omar", "Sr_st_Aman", "Sr_st_Croe", "Op_fu_Rall", "Op_me_Ppil", "Ex_fo_Sbar", "Sr_di_Smic", "Sr_ap_Gnip", "Sr_st_Ppar", "EE_br_Stet", "Ba_pg_Abau", "Ba_ac_Cdip", "Ba_pd_Daes", "Ba_cy_Pspb", "Ba_cy_Acyl", "Ba_cy_Onig", "Ba_ch_Caur", "Ba_di_Dtur", "Ba_fb_Gkau", "Ba_ni_Tyel", "Za_ko_ckor", "Ba_sp_Sple", "Ba_pl_Plim", "Ba_bc_Ctha", "Ba_fu_Fnuc", "Ba_te_Alai", "Ba_pg_ecol", "Ba_pb_bpse", "Ba_pa_Abra", "Ba_de_Trad", "Ba_th_tmar", "Ba_pb_Vpar", "Ba_ba_Bfra", "Ba_fc_Oval", "EE_ap_Asig", "Ba_cd_Cmur", "Za_eh_Haci", "Za_eh_Ngre", "Ba_aq_aaeo", "Za_et_Tkod", "Za_ec_Minf", "Za_ey_Mkan", "Za_eb_Mspa", "Za_em_Mhol", "Za_cr_Sisl", "Za_th_Csym", "Ex_eu_Dpap", "Za_ep_tvol", "Za_na_nequ", "Ba_cv_Amuc", "Ba_pa_rpro", "Za_pa_Maci", "Za_cr_Tneu", "Sr_ap_Bequ", "Za_ba_Crea", "Op_nu_Falb"]
+#weirdtaxalist = ["Ex_pa_Tfoe", "Sr_st_tpse", "Sr_st_Csub", "Am_di_Naes", "Op_me_hsap", "Op_me_sman", "Op_me_cele", "Op_me_Dpul", "Op_me_Ctel", "Op_me_tadh", "Op_fu_Amac", "Ex_eu_Bsal", "Ex_he_Ngru", "EE_ap_Ttra", "Sr_st_Bpac", "Pl_gr_Pspg", "Op_ch_mbre", "EE_is_Drot", "Sr_st_Dspe", "EE_cr_Gcry", "Sr_st_Pinf", "Sr_di_Hsps", "Sr_rh_Sspa", "Sr_di_Aspi", "Sr_di_Gcat", "Sr_ci_Ptet", "Sr_ci_Scer", "Ex_pa_tvag", "Sr_ap_Cpar", "Sr_ap_pfal", "Ex_ma_Mjak", "Ex_is_Tpyr", "Pl_rh_Ccho", "Pl_rh_Rmar", "Pl_rh_Ccoe", "Pl_rh_Gsul", "Sr_rh_Lvor", "EE_ce_Rhet", "Am_di_Mspa", "Am_is_Fnol", "EE_ce_Chsp", "EE_ap_Mpla", "EE_ap_Rram", "Ex_ox_Mono", "Sr_rh_Bmot", "EE_ap_Nlon", "EE_is_Tmar", "Ex_eu_Egym", "Sr_ci_Slem", "Op_fu_Aalg", "Am_my_Dpur", "Sr_ch_Vbra", "EE_ap_Ftro", "Am_is_Fflu", "Sr_st_Esil", "Za_as_Heia", "Za_as_Thob", "Za_as_Loki", "Za_as_Odin", "Sr_pe_Perk", "Sr_rh_Cten", "Sr_st_Cfra", "Sr_st_Aana", "Am_ar_Enut", "Am_ar_Mbal", "Op_fu_Bden", "Pl_gr_Atri", "Sr_st_Ospa", "Op_ch_Sros", "Pl_gr_Cvar", "Op_me_Hvul", "Sr_rh_Bnat", "Sr_st_Goce", "Ex_ja_Rame", "Am_my_Ppol", "Pl_gr_Pcol", "Ex_eu_linf", "Ex_eu_tcon", "Pl_gl_Cpad", "Sr_rh_Astr", "Sr_rh_Erot", "Pl_gr_atha", "Pl_gr_Mpol", "Pl_gr_Tchu", "Pl_gr_crei", "Am_di_Acas", "EE_is_Tglo", "Am_tu_Nabe", "Op_ic_Sarc", "Op_is_Mvib", "Op_me_Cfol", "Op_ic_Cowc", "Op_me_Cpul", "Op_fu_Dspa", "Op_fu_Npat", "Op_fu_Ccor", "Op_fu_scer", "Op_fu_Lcor", "Pl_gl_Gnos", "Op_me_Skow", "Op_ic_Apar", "Sr_rh_Asco", "EE_ha_Ehux", "EE_ha_Igal", "EE_is_Tsub", "EE_br_Bant", "EE_ka_Rtru", "Sr_st_Ngad", "Sr_st_Bhom", "Sr_st_Espi", "Sr_st_Ptri", "Sr_st_Spus", "Sr_di_Omar", "Sr_st_Aman", "Sr_st_Croe", "Op_fu_Rall", "Op_me_Ppil", "Ex_fo_Sbar", "Sr_di_Smic", "Sr_ap_Gnip", "Sr_st_Ppar", "EE_br_Stet", "Ba_pg_Abau", "Ba_ac_Cdip", "Ba_pd_Daes", "Ba_cy_Pspb", "Ba_cy_Acyl", "Ba_cy_Onig", "Ba_ch_Caur", "Ba_di_Dtur", "Ba_fb_Gkau", "Ba_ni_Tyel", "Za_ko_ckor", "Ba_sp_Sple", "Ba_pl_Plim", "Ba_bc_Ctha", "Ba_fu_Fnuc", "Ba_te_Alai", "Ba_pg_ecol", "Ba_pb_bpse", "Ba_pa_Abra", "Ba_de_Trad", "Ba_th_tmar", "Ba_pb_Vpar", "Ba_ba_Bfra", "Ba_fc_Oval", "EE_ap_Asig", "Ba_cd_Cmur", "Za_eh_Haci", "Za_eh_Ngre", "Ba_aq_aaeo", "Za_et_Tkod", "Za_ec_Minf", "Za_ey_Mkan", "Za_eb_Mspa", "Za_em_Mhol", "Za_cr_Sisl", "Za_th_Csym", "Ex_eu_Dpap", "Za_ep_tvol", "Za_na_nequ", "Ba_cv_Amuc", "Ba_pa_rpro", "Za_pa_Maci", "Za_cr_Tneu", "Sr_ap_Bequ", "Za_ba_Crea", "Op_nu_Falb"]
+weirdtaxalist = [] # Leave empty if you want to run script in all taxa included in your trees
+
+if weirdtaxalist == []: 
+	taxlist = 'no'
+else:
+	taxlist = 'yes'
+
 def get_clades(taxon):								# Get different forms of the taxa/clade identifier
 	major = taxon.split('_')[0]   					# The identifier as major clade (e.g., Am, Ex)
 	minor = taxon.split('_')[1]	  					# The identifier as minor clade (e.g., di, eu)
@@ -74,7 +81,13 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 		taxon_names_mod2 = []						# Then, you should initialize this var here.
 				
 		for taxon in taxon_names:							# Take each taxon name
-			taxon_names_mod.append(get_clades(taxon)[4])	# Modify the name using function 'get_clades'
+			taxon_mod = get_clades(taxon)[4]				# Modify the name using function 'get_clades' 
+			taxon_names_mod.append(taxon_mod)				# Append the modified name in taxon_names_mod
+			
+			if taxlist == 'no':								# Next 3 lines are important for running without a taxa list
+				if taxon_mod not in weirdtaxalist:
+					weirdtaxalist.append(taxon_mod)
+					
 			taxon_names_mod2.append(get_clades(taxon)[3])	# Read at the top what 'get_clades' does 
 															# append the modified name in taxon_names_mod
 			
@@ -86,7 +99,7 @@ for t in os.listdir('%s' % path2):		# Take each file in the folder that have the
 		numberLeaves = 0
 		error_tree = ''	
 		
-		if taxon_names_mod2 > 4:
+		if taxon_names_mod2 > 4:					# We are only considering trees with at least 4 minor clades 
 			for taxa in weirdtaxalist:				# For each weird taxon ...
 				if taxa in taxon_names_mod:			# If the weird taxon is in taxon_names_mod...
 													# As taxon_names_mod contains all taxa in the tree...
