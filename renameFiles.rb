@@ -1,7 +1,7 @@
-list = File.open('list').readlines()
+list = File.open('/Users/katzlab32/Desktop/conta/list', 'r').readlines()
 
-path = '/Users/katzlab32/Documents/PyloTOL/DataFiles/BlastFiles'
-pathreplaced = '/Users/katzlab32/Documents/PyloTOL/DataFiles/replaced'
+path = '/Users/katzlab32/Desktop/conta/BlastFiles'
+pathreplaced = '/Users/katzlab32/Desktop/conta/renamed'
 
 (Dir.open(path)).each do |filename|
 	if filename !~ /^\./
