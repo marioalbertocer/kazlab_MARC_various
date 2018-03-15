@@ -64,5 +64,5 @@ scripts for my research in katzlab
 		* It retrieves all sequences that were removed for the overla filter. It put them in a folder created by the user
 		* It prints in the terminal a table with counts of sequences in:
 			* before overlap filter
-			* during the filter (TSV files)
+			* during the filter (tsv files)
 			* after the filter (pre-guidance files)
