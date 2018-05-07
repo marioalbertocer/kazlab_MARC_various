@@ -66,3 +66,8 @@ scripts for my research in katzlab
 			* before overlap filter
 			* during the filter (tsv files)
 			* after the filter (pre-guidance files)
+* countOGSandTIPS.rb: Counta taxa on folder of trees. 
+	* Input:
+		* Folder of trees
+	* output:
+		* report of taxa in tree. Taxa are diveded in minor, major clades and lineges.
