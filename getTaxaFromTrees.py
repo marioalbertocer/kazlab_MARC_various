@@ -3,7 +3,7 @@ from p4 import *
 var.doRepairDupedTaxonNames = 2 # This line fixes duplicates problems for p4
 
 #path = '/Users/marioceron/Documents/katzlab/Pipelinev2_2_archive/'
-path = '/Users/marioceron/Documents/katzlab/some_scripts_python/try2/'
+path = '/Users/katzlab32/Documents/PhyloTOL/050718_dupli/'
 #path = '/Users/marioceron/Documents/katzlab/NonRandom.MicroIn/02-RAxML_trees/'
 
 OGs = []
@@ -19,9 +19,11 @@ def get_clades(taxon):
 for tree_file in os.listdir(path):    
     
     if 'OG5_' in tree_file:
+    	OG = 'OG5_' + (tree_file.split('OG5_')[1])[0:6]
         count += 1
 #        print "Count = %s\t%s" % (count, tree_file)
-        OG = tree_file.split('_')[0] + '_' + tree_file.split('_')[1]
+		
+#        OG = tree_file.split('_')[0] + '_' + tree_file.split('_')[1]
 #        OG = tree_file.split('.')[1]
         tree_file = tree_file.strip('\n')
         tree_line = open('%s%s' % (path, tree_file))
