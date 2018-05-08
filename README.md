@@ -71,3 +71,9 @@ scripts for my research in katzlab
 		* Folder of trees
 	* output:
 		* report of taxa in tree. Taxa are diveded in minor, major clades and lineges.
+* treesCriteria.rb: Check that trees meet the criterion of having at least some number of taxa (default 10) and having at least some number of minor of clades for some number of major clades (default: 2minC and 3majC)
+	* Input: 
+		* The folder with the trees. The path is specified in the script itself
+	* Output:
+		* 'yes' or 'no' if each tree meet criterion1 and criterion2
+		* counts of minor clades
