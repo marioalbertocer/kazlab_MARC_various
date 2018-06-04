@@ -1,12 +1,11 @@
-path2trees = '/Users/marioceron/Documents/katzlab/duplications/orthomcl-release5/'
+path2trees = '/Users/katzlab32/Documents/PhyloTOL/051418_dupli/'
 #out = File.open(path + folder + 'criteriaANDcounts_out.txt', 'w')
-
-listOGs = listOGs.readlines()
 
 mncCut = 3
 mjcCut = 3
+ignoreMJC = ['EE', 'Ba' + 'Za']
 
-treesDir = Dir.open(path + 'Pipelinev2_2_archive/')
+treesDir = Dir.open(path2trees)
 treesDir.each do |i|
 
 	if i =~ /OG5_/
@@ -52,7 +51,7 @@ treesDir.each do |i|
 		if majCs.length >= mjcCut
 			majCs.each do |majC|
 				counter = 0
-				if majC != 'EE'
+				if ignoreMJC !~ majC
 					minCs.each do |minC|
 						if majC == minC.split('_')[0]
 							counter += 1
@@ -78,7 +77,7 @@ treesDir.each do |i|
 		end
 			
  		# The report is corrected with criterion and counts and printed in the terminal
-		puts "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % [line, og, criterion1, criterion2, op, am, ex, ee, pl, sr, za, ba]
+		puts "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % [og, criterion1, criterion2, op, am, ex, ee, pl, sr, za, ba]
 #		out.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" % [line, og, criterion, op, am, ex, ee, pl, sr, za, ba]) 		
 	end
 end
