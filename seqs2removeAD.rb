@@ -70,6 +70,7 @@ puts "\nseqs2removeAD.rb: removing sequences from Databases:"
 			end
 			index += 1
 		end
+		newncbiFile.close
 	end
 end
 
