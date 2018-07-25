@@ -77,3 +77,9 @@ scripts for my research in katzlab
 	* Output:
 		* 'yes' or 'no' if each tree meet criterion1 and criterion2
 		* counts of minor clades
+* seqs2removeAD.rb: :removes sequences from local databases. We use it for removing sequences of contamination from ready to go folder. 
+  * Input:
+  	* list of sequences to remove
+    * folder of ncbiFiles
+  * Output:
+    * new ncbiFiles with sequences already removed
