@@ -77,9 +77,13 @@ scripts for my research in katzlab
 	* Output:
 		* 'yes' or 'no' if each tree meet criterion1 and criterion2
 		* counts of minor clades
-* seqs2removeAD.rb: :removes sequences from local databases. We use it for removing sequences of contamination from ready to go folder. 
-  * Input:
-  	* list of sequences to remove
-    * folder of ncbiFiles
-  * Output:
-    * new ncbiFiles with sequences already removed
+* seqs2removeAD.rb: removes sequences from local databases. We use it for removing sequences of contamination from ready to go folder. 
+	* Input:
+  		* list of sequences to remove
+    	* folder of ncbiFiles
+	* Output:
+		* new ncbiFiles with sequences already removed
+* bacteriaFTPrefseqDownload.pl: Get data from NCBI FTP site. I wrote this script for working with bacteria. It should work with some other databases but it might require some extra changes.
+	* Run:
+		* Download the script and place it in a folder. In this folder is where sequences will be downloaded.
+		* perl bacteriaFTPrefseqDownload.pl
