@@ -13,56 +13,65 @@ $ftp->cwd("$pathTObact");  													# going to the path
 
 my $Bacteria = '';
 my @Directorios = $ftp->ls;
+open(LIST, "Missing_Ba.txt");
+my @list = <LIST>;
+#print @list;
+my $count = 0;
+foreach my $taxon (@list) {
+	chomp $taxon;
+	
+	print "here 1 $taxon\n";	
+	foreach $Bacteria (@Directorios) {				# Opening each subdirectory. This would loop through all available taxa of bacteria. $bacteria takes the taxon name.
+		if ($Bacteria =~ $taxon) {
+			print "here 2 $taxon\n";				
+			$ftp->cwd("$Bacteria/");				# Entering the database for that particular taxon			
+			my @archivos = $ftp->ls;				# listing all files inside
 
-foreach $Bacteria (@Directorios) {				# Opening each subdirectory. This would loop through all available taxa of bacteria. $bacteria takes the taxon name.
-	if ($Bacteria =~ /_/) {				
-		$ftp->cwd("$Bacteria/");				# Entering the database for that particular taxon			
-		my @archivos = $ftp->ls;				# listing all files inside
+			foreach my $subdirectory (@archivos){		# Saco el archivo que está en el subdirectorio
 
-		foreach my $subdirectory (@archivos){		# Saco el archivo que está en el subdirectorio
-
-			if ($subdirectory =~ /latest_assembly_versions/) {  # focusing only in last assemblies
-#				print "$subdirectory\n";
-				my $path = $pathTObact . $Bacteria. "/" . $subdirectory . "/";  # IMPORTANT --- NCBI uses references instead of physical folders some times.
-																				# Here we set this path to return every time that we are sent to some other weird
-																				# place.
-				print $path;
-				$ftp->cwd("$path");
-				my @subdFiles = $ftp->ls;       # listing files inside the last assembly folder
+				if ($subdirectory =~ /latest_assembly_versions/) {  # focusing only in last assemblies
+					print "$subdirectory\n";
+					my $path = $pathTObact . $Bacteria. "/" . $subdirectory . "/";  # IMPORTANT --- NCBI uses references instead of physical folders some times.
+																					# Here we set this path to return every time that we are sent to some other weird
+																					# place.
+					print $path;
+					$ftp->cwd("$path");
+					my @subdFiles = $ftp->ls;       # listing files inside the last assembly folder
 				
-				print "$subdFiles[0]\n";        # Inside we will find some REFERENCES of folders instead of actual folder. They look like GCF_001612905.1
-												# We go to the first one and we will extract files only from this reference. Once we finish, we have to return tp 
-												# the parental folder. But, given that this is a reference and not an actual folder, we will be in some other weir place. 
-												# So, "cd .." or "cdup" would not work. Instad we need to use the path that we set before in $path. 
- 				
-				if ($subdFiles[0] =~ /^GCF/){
-					$ftp->cwd("$subdFiles[0]");
-					my @bacteriaFiles = $ftp->ls;
+					print "$subdFiles[0]\n";        # Inside we will find some REFERENCES of folders instead of actual folder. They look like GCF_001612905.1
+													# We go to the first one and we will extract files only from this reference. Once we finish, we have to return tp 
+													# the parental folder. But, given that this is a reference and not an actual folder, we will be in some other weir place. 
+													# So, "cd .." or "cdup" would not work. Instad we need to use the path that we set before in $path. 
+				
+					if ($subdFiles[0] =~ /^GCF/){
+						$ftp->cwd("$subdFiles[0]");
+						my @bacteriaFiles = $ftp->ls;
 					
-					foreach my $bacteriaFile (@bacteriaFiles){
-						if ($bacteriaFile =~ /cds_from_genomic.fna.gz/){
+						foreach my $bacteriaFile (@bacteriaFiles){
+							if ($bacteriaFile =~ /_genomic.gbff.gz/){
 
-#							print $ftp->pwd;
-							print "$bacteriaFile\n";
-							$ftp->binary;   # IMPORTANT --- Before transferring files, their server changes from binary to ASCII. It's important to change to "binary" again
-											# otherwise the files that we transfer will be corrupted. 
+								print $ftp->pwd;
+								print "$bacteriaFile\n";
+								$ftp->binary;   # IMPORTANT --- Before transferring files, their server changes from binary to ASCII. It's important to change to "binary" again
+												# otherwise the files that we transfer will be corrupted. 
 											 
-							$ftp->get("$bacteriaFile", "$bacteriaFile");  # getting file. 
-							system("gunzip $bacteriaFile"); 		
+								$ftp->get("$bacteriaFile", "$count"."$bacteriaFile");  # getting file. 
+#								system("gunzip $bacteriaFile"); 		
+							}
 						}
+
+						$ftp->cwd("$path");	# Return to "parental" path using "cd" or "cwd" and the path set above instead of "cd ..", explanation above.
+
+					} else {
+						print $ftp->pwd;
+						print "\n";	
 					}
-
-					$ftp->cwd("$path");	# Return to "parental" path using "cd" or "cwd" and the path set above instead of "cd ..", explanation above.
-
-				} else {
-					print $ftp->pwd;
-					print "\n";	
-				}
 				
-				$ftp->cdup(); # Once it finishes with a lineage, we can go to next lineage by returning to parental folder. 
-			}
-		}		
-		$ftp->cdup(); 	
+					$ftp->cdup(); # Once it finishes with a lineage, we can go to next lineage by returning to parental folder. 
+				}
+			}		
+			$ftp->cdup(); 	
+		}
 	}
 }
 
