@@ -87,3 +87,8 @@ scripts for my research in katzlab
 	* Run:
 		* Download the script and place it in a folder. In this folder is where sequences will be downloaded.
 		* perl bacteriaFTPrefseqDownload.pl
+* checkduplicates.py: check if there are duplicates in a folder with fasta files. It also prints the duplicates. 
+	* Run:
+		* Make sure that you are in a folder in which the only fasta files are the ones that you want to check for duplicates. 
+		* Fasta files could be aligned or unaligned
+		* python checkduplicates.py
